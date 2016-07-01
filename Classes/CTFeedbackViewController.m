@@ -164,6 +164,7 @@ typedef NS_ENUM(NSInteger, CTFeedbackSection){
     __weak CTFeedbackViewController *weakSelf = self;
     
     self.topicCellItem = [CTFeedbackTopicCellItem new];
+    self.topicCellItem.title = [self topicCellTitle];
     self.topicCellItem.topic = self.localizedTopics[self.selectedTopicIndex];
     self.topicCellItem.action = ^(CTFeedbackViewController *sender) {
         CTFeedbackTopicsViewController *topicsViewController = [[CTFeedbackTopicsViewController alloc] initWithStyle:UITableViewStyleGrouped];
@@ -214,6 +215,10 @@ typedef NS_ENUM(NSInteger, CTFeedbackSection){
     [result addObject:self.additionCellItem];
 
     return [result copy];
+}
+
+- (NSString *)topicCellTitle {
+    return CTFBLocalizedString(@"Topic");
 }
 
 - (NSArray *)deviceInfoCellItems
