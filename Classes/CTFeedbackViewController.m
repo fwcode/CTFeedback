@@ -111,17 +111,6 @@ typedef NS_ENUM(NSInteger, CTFeedbackSection){
     if (self.navigationController.navigationBarHidden) {
         self.navigationController.navigationBarHidden = NO;
     }
-
-	if(self.navigationController != nil){
-		if( [self.navigationController viewControllers][0] == self){
-			self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped:)];
-		}else{
-			// Keep the standard back button instead of "Cancel"
-			self.navigationItem.leftBarButtonItem = nil;
-		}
-	} else {
-		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped:)];
-	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -147,21 +136,6 @@ typedef NS_ENUM(NSInteger, CTFeedbackSection){
 }
 
 #pragma mark -
-
-- (void)cancelButtonTapped:(id)sender
-{
-    if(self.navigationController != nil){
-        if( [self.navigationController viewControllers][0] == self){
-            // Can't pop, just dismiss
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }else{
-            // Can be popped
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    }else{
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-}
 
 - (void)setTopics:(NSArray *)topics
 {
@@ -193,6 +167,7 @@ typedef NS_ENUM(NSInteger, CTFeedbackSection){
     self.topicCellItem.topic = self.localizedTopics[self.selectedTopicIndex];
     self.topicCellItem.action = ^(CTFeedbackViewController *sender) {
         CTFeedbackTopicsViewController *topicsViewController = [[CTFeedbackTopicsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        topicsViewController.title = self.selectSubjectScreenTitle;
         topicsViewController.topics = sender.topics;
         topicsViewController.localizedTopics = sender.localizedTopics;
         topicsViewController.action = ^(NSString *selectedTopic) {
