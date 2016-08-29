@@ -40,6 +40,7 @@
 @property (nonatomic, readonly) NSString *appName;
 @property (nonatomic, readonly) NSString *appVersion;
 @property (nonatomic, readonly) NSString *appBuild;
+@property (nonatomic, copy) NSString *selectSubjectScreenTitle;
 
 @property (nonatomic, strong) NSArray *toRecipients;
 @property (nonatomic, strong) NSArray *ccRecipients;
